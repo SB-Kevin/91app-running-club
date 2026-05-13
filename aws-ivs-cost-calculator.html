@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AWS IVS 費用計算器 — 91APP LiveBuy</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap');
+
+  :root {
+    --bg: #0a0c10;
+    --bg2: #11141a;
+    --bg3: #181c24;
+    --border: #232830;
+    --border2: #2e3540;
+    --text: #e8ecf2;
+    --text2: #8899aa;
+    --text3: #566070;
+    --accent: #00d4ff;
+    --accent2: #0099cc;
+    --green: #00e5a0;
+    --yellow: #ffcc44;
+    --orange: #ff8833;
+    --red: #ff4466;
+    --tw: #00b4e6;
+    --hk: #e63946;
+    --my: #3bb54a;
+    --radius: 6px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 13px;
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  /* Header */
+  .header {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    padding: 18px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .header-left { display: flex; align-items: center; gap: 14px; }
+  .header-logo {
+    width: 32px; height: 32px;
+    background: linear-gradient(135deg, var(--accent), #0060aa);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600; font-size: 12px; color: #fff;
+    flex-shrink: 0;
+  }
+  .header-title { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+  .header-sub { font-size: 11px; color: var(--text3); font-family: 'IBM Plex Mono', monospace; margin-top: 1px; }
+  .header-badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; color: var(--accent);
+    border: 1px solid var(--accent2);
+    border-radius: 3px;
+    padding: 2px 7px;
+    background: rgba(0,212,255,0.06);
+  }
+
+  /* Layout */
+  .layout { display: grid; grid-template-columns: 300px 1fr; gap: 0; height: calc(100vh - 61px); }
+
+  /* Left Panel */
+  .left-panel {
+    background: var(--bg2);
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    padding: 20px;
+  }
+
+  .panel-section { margin-bottom: 22px; }
+  .panel-section-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    font-weight: 600;
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .field { margin-bottom: 12px; }
+  .field label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--text2);
+    margin-bottom: 5px;
+    font-weight: 500;
+  }
+  .field label .val {
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  input[type="range"] {
+    width: 100%;
+    -webkit-appearance: none;
+    height: 3px;
+    background: var(--border2);
+    border-radius: 2px;
+    outline: none;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--accent);
+    cursor: pointer;
+    border: 2px solid var(--bg);
+    box-shadow: 0 0 0 2px var(--accent2);
+  }
+
+  .number-input {
+    width: 100%;
+    background: var(--bg3);
+    border: 1px solid var(--border2);
+    color: var(--text);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    padding: 6px 10px;
+    border-radius: var(--radius);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .number-input:focus { border-color: var(--accent); }
+
+  /* Quality toggle */
+  .quality-toggle { display: flex; gap: 6px; }
+  .qtog {
+    flex: 1;
+    padding: 6px 0;
+    background: var(--bg3);
+    border: 1px solid var(--border2);
+    color: var(--text2);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: var(--radius);
+    text-align: center;
+    transition: all 0.15s;
+  }
+  .qtog.active { background: rgba(0,212,255,0.12); border-color: var(--accent); color: var(--accent); }
+
+  /* Market toggle */
+  .market-flags { display: flex; gap: 6px; flex-direction: column; }
+  .mflag {
+    display: flex; align-items: center; gap: 8px;
+    padding: 7px 10px;
+    background: var(--bg3);
+    border: 1px solid var(--border2);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.15s;
+    user-select: none;
+  }
+  .mflag.on { border-color: var(--accent); background: rgba(0,212,255,0.06); }
+  .mflag-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .mflag-name { font-size: 12px; font-weight: 500; flex: 1; }
+  .mflag-sub { font-size: 10px; color: var(--text3); font-family: 'IBM Plex Mono', monospace; }
+  .mflag-check { font-size: 12px; color: var(--accent); }
+
+  .vod-completion { display: flex; gap: 6px; }
+  .ctog {
+    flex: 1; padding: 5px 0;
+    background: var(--bg3);
+    border: 1px solid var(--border2);
+    color: var(--text2);
+    font-size: 10px;
+    font-family: 'IBM Plex Mono', monospace;
+    cursor: pointer;
+    border-radius: var(--radius);
+    text-align: center;
+    transition: all 0.15s;
+  }
+  .ctog.active { background: rgba(0,229,160,0.1); border-color: var(--green); color: var(--green); }
+
+  /* Exchange rate */
+  .exrate-row { display: flex; gap: 6px; }
+  .exrate-row .number-input { width: 70px; }
+  .exrate-row span { font-size: 11px; color: var(--text3); display: flex; align-items: center; font-family: 'IBM Plex Mono', monospace; }
+
+  /* Main area */
+  .main-area { overflow-y: auto; padding: 20px 24px; }
+
+  /* Summary cards */
+  .summary-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
+  .sum-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .sum-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  }
+  .sum-card.tw::before { background: var(--tw); }
+  .sum-card.hk::before { background: var(--hk); }
+  .sum-card.my::before { background: var(--my); }
+  .sum-card.total::before { background: var(--accent); }
+  .sum-card.disabled { opacity: 0.3; }
+
+  .sum-card-label {
+    font-size: 10px; font-family: 'IBM Plex Mono', monospace;
+    color: var(--text3); text-transform: uppercase; letter-spacing: 0.08em;
+    margin-bottom: 6px;
+  }
+  .sum-card-main {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 22px; font-weight: 600;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
+  .sum-card-ntd { font-size: 11px; color: var(--text3); font-family: 'IBM Plex Mono', monospace; }
+  .sum-card-sub { font-size: 10px; color: var(--text2); margin-top: 8px; }
+  .sum-card-sub span { color: var(--text); font-weight: 500; }
+
+  /* Combined total card */
+  .total-card {
+    background: var(--bg2);
+    border: 1px solid var(--border2);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .total-card-label { font-size: 11px; color: var(--text3); font-family: 'IBM Plex Mono', monospace; text-transform: uppercase; letter-spacing: 0.08em; }
+  .total-card-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 28px; font-weight: 600;
+    color: var(--accent);
+  }
+  .total-card-ntd { font-size: 13px; color: var(--text2); font-family: 'IBM Plex Mono', monospace; margin-top: 2px; }
+  .total-card-right { display: flex; flex-direction: column; align-items: flex-end; }
+  .total-card-breakdown { display: flex; gap: 20px; }
+  .tbd-item { font-size: 11px; color: var(--text3); }
+  .tbd-item strong { display: block; color: var(--text); font-family: 'IBM Plex Mono', monospace; font-size: 13px; }
+
+  /* Detail section */
+  .detail-section { margin-bottom: 16px; }
+  .detail-title {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 12px; font-weight: 600;
+    color: var(--text2);
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+  .detail-title-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .detail-title .market-rate { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--text3); margin-left: auto; }
+
+  /* Cost table */
+  .cost-table { width: 100%; border-collapse: collapse; }
+  .cost-table th {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+    padding: 0 10px 6px;
+    text-align: left;
+  }
+  .cost-table th:last-child { text-align: right; }
+  .cost-table td {
+    padding: 7px 10px;
+    font-size: 12px;
+    color: var(--text2);
+    border-top: 1px solid var(--border);
+  }
+  .cost-table td:last-child {
+    text-align: right;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text);
+  }
+  .cost-table td.cost-label { color: var(--text); font-weight: 500; }
+  .cost-table td.cost-formula { color: var(--text3); font-family: 'IBM Plex Mono', monospace; font-size: 10px; }
+  .cost-table tr.subtotal td {
+    background: rgba(255,255,255,0.02);
+    font-weight: 600;
+    color: var(--text);
+  }
+  .cost-table tr.subtotal td:last-child { color: var(--accent); }
+  .cost-table tr.grand-total td {
+    background: rgba(0,212,255,0.04);
+    border-top: 2px solid var(--border2);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .cost-table tr.grand-total td:last-child {
+    color: var(--accent);
+    font-size: 14px;
+  }
+
+  .cost-badge {
+    display: inline-flex; align-items: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px; font-weight: 600;
+    padding: 1px 5px;
+    border-radius: 3px;
+    margin-left: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .badge-input { background: rgba(0,212,255,0.1); color: var(--accent); }
+  .badge-output { background: rgba(0,229,160,0.1); color: var(--green); }
+  .badge-vod { background: rgba(255,204,68,0.1); color: var(--yellow); }
+  .badge-s3 { background: rgba(255,136,51,0.1); color: var(--orange); }
+  .badge-free { background: rgba(86,96,112,0.2); color: var(--text3); }
+
+  /* Markets grid */
+  .markets-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .market-block {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: opacity 0.2s;
+  }
+  .market-block.disabled { opacity: 0.25; pointer-events: none; }
+  .market-block-header {
+    padding: 10px 14px;
+    display: flex; align-items: center; gap: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .market-block-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .market-block-name { font-size: 12px; font-weight: 600; flex: 1; }
+  .market-block-total {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px; font-weight: 600;
+    color: var(--text);
+  }
+  .market-block-body { padding: 10px 14px; }
+  .mrow {
+    display: flex; align-items: baseline;
+    justify-content: space-between;
+    padding: 4px 0;
+    font-size: 11px;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+  }
+  .mrow:last-child { border-bottom: none; }
+  .mrow-label { color: var(--text3); }
+  .mrow-val { font-family: 'IBM Plex Mono', monospace; color: var(--text2); font-size: 11px; }
+  .mrow-val.highlight { color: var(--text); font-weight: 500; }
+
+  /* Assumptions section */
+  .assumptions {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    margin-bottom: 20px;
+  }
+  .assumptions-title {
+    font-size: 10px; color: var(--text3);
+    font-family: 'IBM Plex Mono', monospace;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    margin-bottom: 10px;
+  }
+  .assumptions-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+  .assm-item { }
+  .assm-key { font-size: 10px; color: var(--text3); margin-bottom: 2px; }
+  .assm-val { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--text); font-weight: 500; }
+
+  /* Weekly/Monthly toggle */
+  .period-toggle { display: flex; gap: 6px; margin-bottom: 16px; }
+  .ptog {
+    padding: 5px 14px;
+    background: var(--bg3);
+    border: 1px solid var(--border2);
+    color: var(--text2);
+    font-size: 11px;
+    font-family: 'IBM Plex Mono', monospace;
+    cursor: pointer;
+    border-radius: var(--radius);
+    transition: all 0.15s;
+  }
+  .ptog.active { background: rgba(0,212,255,0.1); border-color: var(--accent); color: var(--accent); }
+
+  .section-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-size: 11px;
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+  }
+
+  /* Warning note */
+  .note {
+    font-size: 11px; color: var(--text3);
+    padding: 8px 12px;
+    background: rgba(255,255,255,0.02);
+    border-left: 2px solid var(--border2);
+    border-radius: 0 4px 4px 0;
+    line-height: 1.7;
+    margin-top: 16px;
+  }
+  .note strong { color: var(--text2); }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 4px; height: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+
+  .divider { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
+
+  .tag-row { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+  .tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px; padding: 2px 6px;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <div class="header-logo">IVS</div>
+    <div>
+      <div class="header-title">AWS IVS 費用計算器</div>
+      <div class="header-sub">ap-northeast-1 (Tokyo) · Low-Latency · Standard Channel</div>
+    </div>
+  </div>
+  <div class="header-badge">91APP LiveBuy</div>
+</div>
+
+<div class="layout">
+  <!-- LEFT PANEL -->
+  <div class="left-panel">
+
+    <div class="panel-section">
+      <div class="panel-section-title">直播參數</div>
+
+      <div class="field">
+        <label>場次 / 週 <span class="val" id="lbl-sessions-week">2</span></label>
+        <input type="range" id="sl-sessions-week" min="1" max="14" value="2" step="1">
+      </div>
+      <div class="field">
+        <label>每場時長 (小時) <span class="val" id="lbl-hours">1</span></label>
+        <input type="range" id="sl-hours" min="0.5" max="8" value="1" step="0.5">
+      </div>
+      <div class="field">
+        <label>同時觀看人數 <span class="val" id="lbl-viewers">200</span></label>
+        <input type="range" id="sl-viewers" min="10" max="20000" value="200" step="10">
+        <div style="margin-top: 6px;">
+          <input type="number" class="number-input" id="num-viewers" value="200" min="1" max="999999">
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-section">
+      <div class="panel-section-title">畫質設定</div>
+      <div class="quality-toggle">
+        <button class="qtog active" onclick="setQuality('hd', this)">HD<br><span style="font-size:9px;opacity:0.7">720p</span></button>
+        <button class="qtog" onclick="setQuality('fullhd', this)">Full HD<br><span style="font-size:9px;opacity:0.7">1080p</span></button>
+      </div>
+      <div class="tag-row" id="quality-tags"></div>
+    </div>
+
+    <div class="panel-section">
+      <div class="panel-section-title">VOD 回放</div>
+      <div class="field">
+        <label>回放次數 / 場 <span class="val" id="lbl-vod">0</span></label>
+        <input type="range" id="sl-vod" min="0" max="2000" value="0" step="10">
+        <div style="margin-top: 6px;">
+          <input type="number" class="number-input" id="num-vod" value="0" min="0">
+        </div>
+      </div>
+      <div class="field">
+        <label>回放完成率</label>
+        <div class="vod-completion">
+          <button class="ctog active" onclick="setVodRate(0.25, this)">25%</button>
+          <button class="ctog" onclick="setVodRate(0.5, this)">50%</button>
+          <button class="ctog" onclick="setVodRate(0.75, this)">75%</button>
+          <button class="ctog" onclick="setVodRate(1.0, this)">100%</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-section">
+      <div class="panel-section-title">啟用市場</div>
+      <div class="market-flags">
+        <div class="mflag on" id="mflag-tw" onclick="toggleMarket('tw')">
+          <div class="mflag-dot" style="background:var(--tw)"></div>
+          <div>
+            <div class="mflag-name">🇹🇼 Taiwan</div>
+            <div class="mflag-sub">TW Billing Region</div>
+          </div>
+          <div class="mflag-check" id="mcheck-tw">✓</div>
+        </div>
+        <div class="mflag on" id="mflag-hk" onclick="toggleMarket('hk')">
+          <div class="mflag-dot" style="background:var(--hk)"></div>
+          <div>
+            <div class="mflag-name">🇭🇰 Hong Kong</div>
+            <div class="mflag-sub">JP/HK/SEA Billing</div>
+          </div>
+          <div class="mflag-check" id="mcheck-hk">✓</div>
+        </div>
+        <div class="mflag on" id="mflag-my" onclick="toggleMarket('my')">
+          <div class="mflag-dot" style="background:var(--my)"></div>
+          <div>
+            <div class="mflag-name">🇲🇾 MY + 🇸🇬 SG</div>
+            <div class="mflag-sub">JP/HK/SEA Billing</div>
+          </div>
+          <div class="mflag-check" id="mcheck-my">✓</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-section">
+      <div class="panel-section-title">換算設定</div>
+      <div class="exrate-row">
+        <span>1 USD =</span>
+        <input type="number" class="number-input" id="exrate" value="32" min="1" style="width:70px">
+        <span>TWD</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- MAIN AREA -->
+  <div class="main-area">
+
+    <!-- Period Toggle -->
+    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
+      <div class="period-toggle">
+        <button class="ptog" onclick="setPeriod('weekly', this)">每週</button>
+        <button class="ptog active" onclick="setPeriod('monthly', this)">每月</button>
+      </div>
+      <div style="font-size:10px; color:var(--text3); font-family:'IBM Plex Mono',monospace;" id="period-note">
+        每月 = 場次/週 × 4.33 週
+      </div>
+    </div>
+
+    <!-- Total Banner -->
+    <div class="total-card" id="total-banner">
+      <div>
+        <div class="total-card-label">所有市場合計 · 每月</div>
+        <div class="total-card-num" id="total-usd">$0.00</div>
+        <div class="total-card-ntd" id="total-ntd">NT$0</div>
+      </div>
+      <div class="total-card-breakdown" id="total-breakdown"></div>
+    </div>
+
+    <!-- Market Summary Cards -->
+    <div class="section-header">
+      <div class="section-title">市場費用摘要</div>
+    </div>
+    <div class="markets-grid">
+      <div class="market-block" id="block-tw">
+        <div class="market-block-header">
+          <div class="market-block-dot" style="background:var(--tw)"></div>
+          <div class="market-block-name">Taiwan 🇹🇼</div>
+          <div class="market-block-total" id="m-tw-total">$0</div>
+        </div>
+        <div class="market-block-body">
+          <div class="mrow"><span class="mrow-label">IVS Input</span><span class="mrow-val" id="m-tw-input">$0</span></div>
+          <div class="mrow"><span class="mrow-label">IVS Output</span><span class="mrow-val highlight" id="m-tw-output">$0</span></div>
+          <div class="mrow"><span class="mrow-label">VOD CloudFront</span><span class="mrow-val" id="m-tw-vod">$0</span></div>
+          <div class="mrow"><span class="mrow-label">S3 儲存</span><span class="mrow-val" id="m-tw-s3">$0</span></div>
+          <div class="mrow"><span class="mrow-label">NT$ 換算</span><span class="mrow-val" id="m-tw-ntd">NT$0</span></div>
+        </div>
+      </div>
+      <div class="market-block" id="block-hk">
+        <div class="market-block-header">
+          <div class="market-block-dot" style="background:var(--hk)"></div>
+          <div class="market-block-name">Hong Kong 🇭🇰</div>
+          <div class="market-block-total" id="m-hk-total">$0</div>
+        </div>
+        <div class="market-block-body">
+          <div class="mrow"><span class="mrow-label">IVS Input</span><span class="mrow-val" id="m-hk-input">$0</span></div>
+          <div class="mrow"><span class="mrow-label">IVS Output</span><span class="mrow-val highlight" id="m-hk-output">$0</span></div>
+          <div class="mrow"><span class="mrow-label">VOD CloudFront</span><span class="mrow-val" id="m-hk-vod">$0</span></div>
+          <div class="mrow"><span class="mrow-label">S3 儲存</span><span class="mrow-val" id="m-hk-s3">$0</span></div>
+          <div class="mrow"><span class="mrow-label">NT$ 換算</span><span class="mrow-val" id="m-hk-ntd">NT$0</span></div>
+        </div>
+      </div>
+      <div class="market-block" id="block-my">
+        <div class="market-block-header">
+          <div class="market-block-dot" style="background:var(--my)"></div>
+          <div class="market-block-name">MY + SG 🇲🇾🇸🇬</div>
+          <div class="market-block-total" id="m-my-total">$0</div>
+        </div>
+        <div class="market-block-body">
+          <div class="mrow"><span class="mrow-label">IVS Input</span><span class="mrow-val" id="m-my-input">$0</span></div>
+          <div class="mrow"><span class="mrow-label">IVS Output</span><span class="mrow-val highlight" id="m-my-output">$0</span></div>
+          <div class="mrow"><span class="mrow-label">VOD CloudFront</span><span class="mrow-val" id="m-my-vod">$0</span></div>
+          <div class="mrow"><span class="mrow-label">S3 儲存</span><span class="mrow-val" id="m-my-s3">$0</span></div>
+          <div class="mrow"><span class="mrow-label">NT$ 換算</span><span class="mrow-val" id="m-my-ntd">NT$0</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Assumptions -->
+    <div class="assumptions">
+      <div class="assumptions-title">計算基準 · AWS 官方費率</div>
+      <div class="assumptions-grid" id="assm-grid">
+      </div>
+    </div>
+
+    <!-- Detailed breakdown table -->
+    <div class="section-header">
+      <div class="section-title">完整費用明細</div>
+    </div>
+
+    <div id="detail-tables"></div>
+
+    <div class="note" id="bottom-note"></div>
+  </div>
+</div>
+
+<script>
+// ─── State ───────────────────────────────────────────────
+const state = {
+  sessionsPerWeek: 2,
+  hoursPerSession: 1,
+  viewers: 200,
+  quality: 'hd',       // 'hd' or 'fullhd'
+  vodPerSession: 0,
+  vodCompletion: 0.25,
+  period: 'monthly',   // 'weekly' or 'monthly'
+  markets: { tw: true, hk: true, my: true },
+  exrate: 32,
+};
+
+// ─── Pricing constants ────────────────────────────────────
+const PRICING = {
+  input: {
+    standard: 2.00,  // per hour
+  },
+  // IVS Output tiers (cumulative hours per month)
+  // [cap, hd_rate, fullhd_rate]
+  outputTiers: [
+    [10000,  0.0920, 0.1840],
+    [50000,  0.0840, 0.1680],
+    [150000, 0.0780, 0.1560],
+    [500000, 0.0700, 0.1400],
+    [Infinity, 0.0620, 0.1240],
+  ],
+  // CloudFront DTO (GB) - first 10TB = 10240 GB
+  cfRate: 0.114,
+  s3Rate: 0.025, // per GB/month
+
+  // Video file size per hour (GB)
+  gbPerHour: { hd: 1.1, fullhd: 1.54 },
+};
+
+// IVS Output tiered calculation
+function calcIVSOutput(totalViewerHours, quality) {
+  let cost = 0;
+  let remaining = totalViewerHours;
+  let prevCap = 0;
+  const rateKey = quality === 'hd' ? 1 : 2;
+
+  for (const tier of PRICING.outputTiers) {
+    const [cap, hdRate, fullHDRate] = tier;
+    const tierSize = Math.min(cap - prevCap, remaining);
+    if (tierSize <= 0) break;
+    const rate = quality === 'hd' ? hdRate : fullHDRate;
+    cost += tierSize * rate;
+    remaining -= tierSize;
+    prevCap = cap;
+    if (remaining <= 0) break;
+  }
+  return cost;
+}
+
+// Sessions per month
+function getSessions() {
+  const base = state.sessionsPerWeek * (state.period === 'monthly' ? 4.33 : 1);
+  return base;
+}
+
+function calcMarket(marketKey) {
+  const sessions = getSessions();
+  const hours = state.hoursPerSession;
+  const viewers = state.viewers;
+  const gbHr = PRICING.gbPerHour[state.quality];
+
+  // IVS Input (per market = 1 channel)
+  const inputHours = sessions * hours;
+  const ivsCost = inputHours * PRICING.input.standard;
+
+  // IVS Output
+  const viewerHours = viewers * sessions * hours;
+  const outputCost = calcIVSOutput(viewerHours, state.quality);
+
+  // S3 Storage (current period's recordings)
+  const recordedGB = sessions * hours * gbHr;
+  const s3Cost = recordedGB * PRICING.s3Rate;
+
+  // CloudFront VOD
+  const vodViews = state.vodPerSession * sessions;
+  const vodGB = vodViews * hours * state.vodCompletion * gbHr;
+  const cfCost = vodGB * PRICING.cfRate;
+
+  const total = ivsCost + outputCost + s3Cost + cfCost;
+
+  return {
+    inputHours,
+    ivsCost,
+    viewerHours,
+    outputCost,
+    recordedGB,
+    s3Cost,
+    vodViews,
+    vodGB,
+    cfCost,
+    total,
+  };
+}
+
+function fmt(n, d = 2) {
+  return '$' + n.toFixed(d);
+}
+function fmtGB(n) { return n.toFixed(1) + ' GB'; }
+function fmtHr(n) { return n.toFixed(1) + ' hr'; }
+function fmtNTD(usd) {
+  return 'NT$' + Math.round(usd * state.exrate).toLocaleString();
+}
+function fmtNum(n) { return n.toFixed(1); }
+
+function getOutputRateLabel(quality) {
+  const t = PRICING.outputTiers[0];
+  return quality === 'hd' ? `$${t[1]}/viewer-hr` : `$${t[2]}/viewer-hr`;
+}
+
+function render() {
+  const sessions = getSessions();
+  const hours = state.hoursPerSession;
+  const viewers = state.viewers;
+  const gbHr = PRICING.gbPerHour[state.quality];
+
+  // Period note
+  document.getElementById('period-note').textContent =
+    state.period === 'monthly'
+      ? `每月 = ${state.sessionsPerWeek} 場/週 × 4.33 週 = ${sessions.toFixed(1)} 場/月`
+      : `每週 = ${state.sessionsPerWeek} 場`;
+
+  // Update market blocks
+  const results = {};
+  let totalUSD = 0;
+  const marketKeys = ['tw', 'hk', 'my'];
+
+  marketKeys.forEach(k => {
+    const r = calcMarket(k);
+    results[k] = r;
+    const enabled = state.markets[k];
+
+    document.getElementById(`block-${k}`).classList.toggle('disabled', !enabled);
+    document.getElementById(`m-${k}-input`).textContent = fmt(r.ivsCost);
+    document.getElementById(`m-${k}-output`).textContent = fmt(r.outputCost);
+    document.getElementById(`m-${k}-vod`).textContent = fmt(r.cfCost);
+    document.getElementById(`m-${k}-s3`).textContent = fmt(r.s3Cost);
+    document.getElementById(`m-${k}-total`).textContent = fmt(r.total);
+    document.getElementById(`m-${k}-ntd`).textContent = fmtNTD(r.total);
+
+    if (enabled) totalUSD += r.total;
+  });
+
+  document.getElementById('total-usd').textContent = fmt(totalUSD);
+  document.getElementById('total-ntd').textContent = fmtNTD(totalUSD);
+  document.getElementById('total-banner').querySelector('.total-card-label').textContent =
+    `所有市場合計 · ${state.period === 'monthly' ? '每月' : '每週'}`;
+
+  // Total breakdown
+  const bk = document.getElementById('total-breakdown');
+  bk.innerHTML = ['tw', 'hk', 'my'].filter(k => state.markets[k]).map(k => {
+    const labels = { tw: '🇹🇼 TW', hk: '🇭🇰 HK', my: '🇲🇾🇸🇬 MY+SG' };
+    return `<div class="tbd-item">${labels[k]}<strong>${fmt(results[k].total)}</strong></div>`;
+  }).join('');
+
+  // Assumptions grid
+  const ag = document.getElementById('assm-grid');
+  const q = state.quality;
+  ag.innerHTML = `
+    <div class="assm-item"><div class="assm-key">IVS Input</div><div class="assm-val">$2.00 / hr</div></div>
+    <div class="assm-item"><div class="assm-key">IVS Output (${q === 'hd' ? '720p HD' : '1080p Full HD'})</div><div class="assm-val">${getOutputRateLabel(q)} (first 10K)</div></div>
+    <div class="assm-item"><div class="assm-key">CloudFront VOD</div><div class="assm-val">$0.114 / GB</div></div>
+    <div class="assm-item"><div class="assm-key">S3 Storage (Tokyo)</div><div class="assm-val">$0.025 / GB/mo</div></div>
+    <div class="assm-item"><div class="assm-key">影片大小 / hr</div><div class="assm-val">${gbHr} GB</div></div>
+    <div class="assm-item"><div class="assm-key">場次/月</div><div class="assm-val">${sessions.toFixed(1)}</div></div>
+    <div class="assm-item"><div class="assm-key">觀看者-小時/月</div><div class="assm-val">${(viewers * sessions * hours).toFixed(0)} hr</div></div>
+    <div class="assm-item"><div class="assm-key">VOD 完成率</div><div class="assm-val">${(state.vodCompletion * 100).toFixed(0)}%</div></div>
+  `;
+
+  // Quality tags
+  const qt = document.getElementById('quality-tags');
+  qt.innerHTML = q === 'hd'
+    ? `<span class="tag" style="background:rgba(0,212,255,0.1);color:var(--accent)">HD = >480 ≤720p</span><span class="tag" style="background:rgba(255,255,255,0.05);color:var(--text3)">$0.092/viewer-hr</span>`
+    : `<span class="tag" style="background:rgba(255,204,68,0.1);color:var(--yellow)">Full HD = >720 ≤1080p</span><span class="tag" style="background:rgba(255,204,68,0.1);color:var(--yellow)">$0.184/viewer-hr</span>`;
+
+  // Detailed tables
+  renderDetailTables(results, sessions, hours, viewers, gbHr);
+
+  // Bottom note
+  document.getElementById('bottom-note').innerHTML = `
+    <strong>費率來源：</strong>
+    IVS 官方定價 aws.amazon.com/ivs/pricing/ · CloudFront Japan 出口 $0.114/GB · S3 ap-northeast-1 $0.025/GB/月<br>
+    <strong>注意事項：</strong>
+    (1) 每市場各為獨立 IVS Channel，input cost 分開計算。(2) TW 與 JP/HK/SEA billing region 目前費率相同（2023 更新後）。
+    (3) IVS Chat：每場 1,500 則 × ${sessions.toFixed(1)} 場 = ${(1500 * sessions).toFixed(0)} 則/月，遠低於 2,700/hr 免費額度，費用 $0。
+    (4) CloudFront 有 1TB/月永久免費額度，若帳號流量未超標，VOD 費用可更低。
+    (5) S3 費用為當期新增錄影量的當月儲存費，隨累積量增加。
+  `;
+}
+
+function renderDetailTables(results, sessions, hours, viewers, gbHr) {
+  const dt = document.getElementById('detail-tables');
+  const marketDefs = [
+    { key: 'tw', name: '🇹🇼 Taiwan', color: 'var(--tw)', billing: 'Taiwan Region', enabled: state.markets.tw },
+    { key: 'hk', name: '🇭🇰 Hong Kong', color: 'var(--hk)', billing: 'Japan/HK/SEA Region', enabled: state.markets.hk },
+    { key: 'my', name: '🇲🇾🇸🇬 MY + SG', color: 'var(--my)', billing: 'Japan/HK/SEA Region (SEA incl. SG, MY)', enabled: state.markets.my },
+  ];
+
+  const q = state.quality;
+  const qLabel = q === 'hd' ? '720p HD' : '1080p Full HD';
+  const outRate = q === 'hd' ? PRICING.outputTiers[0][1] : PRICING.outputTiers[0][2];
+  const viewerHours = viewers * sessions * hours;
+  // Determine tier note
+  let tierNote = '';
+  if (viewerHours <= 10000) tierNote = `Tier 1 (≤10K hrs)`;
+  else if (viewerHours <= 50000) tierNote = `Tier 1+2 (≤50K hrs)`;
+  else tierNote = `Tier 1-3+`;
+
+  let html = '';
+  marketDefs.forEach(m => {
+    const r = results[m.key];
+    if (!m.enabled) return;
+    html += `
+    <div style="margin-bottom:16px;">
+      <div class="detail-title">
+        <div class="detail-title-dot" style="background:${m.color}"></div>
+        ${m.name}
+        <span class="market-rate">${m.billing}</span>
+      </div>
+      <table class="cost-table">
+        <thead>
+          <tr>
+            <th>費用項目</th>
+            <th>計算公式</th>
+            <th style="text-align:right">金額 (USD)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="cost-label">IVS Video Input <span class="cost-badge badge-input">INPUT</span></td>
+            <td class="cost-formula">${sessions.toFixed(1)} 場 × ${hours} hr × $2.00/hr</td>
+            <td>${fmt(r.ivsCost)}</td>
+          </tr>
+          <tr>
+            <td class="cost-label">IVS Video Output <span class="cost-badge badge-output">OUTPUT</span></td>
+            <td class="cost-formula">${viewers.toLocaleString()} 人 × ${sessions.toFixed(1)} 場 × ${hours} hr × $${outRate}/hr &nbsp;[${tierNote}]</td>
+            <td>${fmt(r.outputCost)}</td>
+          </tr>
+          <tr class="subtotal">
+            <td colspan="2">IVS 直播小計</td>
+            <td>${fmt(r.ivsCost + r.outputCost)}</td>
+          </tr>
+          <tr>
+            <td class="cost-label">S3 錄影儲存 <span class="cost-badge badge-s3">S3</span></td>
+            <td class="cost-formula">${sessions.toFixed(1)} 場 × ${hours} hr × ${gbHr} GB/hr × $0.025/GB</td>
+            <td>${fmt(r.s3Cost)}</td>
+          </tr>
+          ${state.vodPerSession > 0 ? `
+          <tr>
+            <td class="cost-label">CloudFront VOD 回放 <span class="cost-badge badge-vod">VOD</span></td>
+            <td class="cost-formula">${state.vodPerSession} 次/場 × ${sessions.toFixed(1)} 場 × ${hours} hr × ${(state.vodCompletion * 100).toFixed(0)}% × ${gbHr} GB/hr × $0.114/GB</td>
+            <td>${fmt(r.cfCost)}</td>
+          </tr>
+          ` : `
+          <tr>
+            <td class="cost-label">CloudFront VOD <span class="cost-badge badge-free">未啟用</span></td>
+            <td class="cost-formula">回放次數 = 0</td>
+            <td>$0.00</td>
+          </tr>
+          `}
+          <tr>
+            <td class="cost-label">IVS Chat <span class="cost-badge badge-free">免費</span></td>
+            <td class="cost-formula">${(1500 * sessions).toFixed(0)} 則/月 < 免費額度</td>
+            <td>$0.00</td>
+          </tr>
+          <tr class="grand-total">
+            <td colspan="2">合計 · ${state.period === 'monthly' ? '每月' : '每週'} &nbsp;&nbsp; <span style="font-size:11px;color:var(--text3);font-family:'IBM Plex Mono',monospace;">${fmtNTD(r.total)}</span></td>
+            <td>${fmt(r.total)}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    `;
+  });
+  dt.innerHTML = html;
+}
+
+// ─── Event handlers ───────────────────────────────────────
+function setQuality(q, btn) {
+  state.quality = q;
+  document.querySelectorAll('.qtog').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  render();
+}
+
+function setVodRate(r, btn) {
+  state.vodCompletion = r;
+  document.querySelectorAll('.ctog').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  render();
+}
+
+function setPeriod(p, btn) {
+  state.period = p;
+  document.querySelectorAll('.ptog').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  render();
+}
+
+function toggleMarket(k) {
+  state.markets[k] = !state.markets[k];
+  const el = document.getElementById(`mflag-${k}`);
+  const chk = document.getElementById(`mcheck-${k}`);
+  el.classList.toggle('on', state.markets[k]);
+  chk.textContent = state.markets[k] ? '✓' : '';
+  render();
+}
+
+// Sliders
+function wireSlider(sliderId, labelId, stateKey, onUpdate) {
+  const sl = document.getElementById(sliderId);
+  const lb = document.getElementById(labelId);
+  sl.addEventListener('input', () => {
+    state[stateKey] = parseFloat(sl.value);
+    lb.textContent = sl.value;
+    if (onUpdate) onUpdate(sl.value);
+    render();
+  });
+}
+
+wireSlider('sl-sessions-week', 'lbl-sessions-week', 'sessionsPerWeek');
+wireSlider('sl-hours', 'lbl-hours', 'hoursPerSession');
+
+// Viewer slider + number input sync
+const slViewers = document.getElementById('sl-viewers');
+const numViewers = document.getElementById('num-viewers');
+const lblViewers = document.getElementById('lbl-viewers');
+slViewers.addEventListener('input', () => {
+  state.viewers = parseInt(slViewers.value);
+  numViewers.value = state.viewers;
+  lblViewers.textContent = state.viewers.toLocaleString();
+  render();
+});
+numViewers.addEventListener('input', () => {
+  const v = parseInt(numViewers.value) || 1;
+  state.viewers = v;
+  lblViewers.textContent = v.toLocaleString();
+  slViewers.value = Math.min(v, 20000);
+  render();
+});
+
+// VOD slider + number sync
+const slVod = document.getElementById('sl-vod');
+const numVod = document.getElementById('num-vod');
+const lblVod = document.getElementById('lbl-vod');
+slVod.addEventListener('input', () => {
+  state.vodPerSession = parseInt(slVod.value);
+  numVod.value = state.vodPerSession;
+  lblVod.textContent = state.vodPerSession;
+  render();
+});
+numVod.addEventListener('input', () => {
+  const v = parseInt(numVod.value) || 0;
+  state.vodPerSession = v;
+  lblVod.textContent = v;
+  slVod.value = Math.min(v, 2000);
+  render();
+});
+
+// Exchange rate
+document.getElementById('exrate').addEventListener('input', function() {
+  state.exrate = parseFloat(this.value) || 32;
+  render();
+});
+
+// Initial render
+render();
+</script>
+</body>
+</html>
