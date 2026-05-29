@@ -1,0 +1,1961 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>91APP 運動風氣推行計畫 — 慢跑社 × 企業跑班</title>
+<meta name="description" content="推行 91APP 運動風氣，慢跑社作為示範社團，企業跑班作為進階訓練。12 週科學化訓練，挑戰台北馬。">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+TC:wght@300;400;500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    /* Neutrals */
+    --color-bg: #FAFAF7;
+    --color-bg-alt: #F4F4F1;
+    --color-bg-dark: #0E0E0E;
+    --color-text: #0A0A0A;
+    --color-text-muted: #525252;
+    --color-text-subtle: #8A8A8A;
+    --color-border: #E5E5E2;
+    --color-border-light: #EEEEEB;
+
+    /* Brand */
+    --color-red: #E72410;
+    --color-red-dark: #B81A0C;
+    --color-red-light: #FCE5E2;
+    --color-red-tint: #FFF5F3;
+
+    /* Sub-brand: 慢跑社 (foundation / teal) */
+    --color-teal: #1D9E75;
+    --color-teal-dark: #08504A;
+    --color-teal-light: #E1F5EE;
+
+    /* Sub-brand: 企業跑班 (advanced / pink) */
+    --color-pink: #D4537E;
+    --color-pink-dark: #72243E;
+    --color-pink-light: #FBEAF0;
+
+    /* Type */
+    --font-display: 'Bricolage Grotesque', 'Noto Sans TC', system-ui, sans-serif;
+    --font-body: 'Plus Jakarta Sans', 'Noto Sans TC', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+    --max-w: 1240px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.6;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* Subtle grain texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.6;
+  }
+
+  .container {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    padding: 0 32px;
+    position: relative;
+    z-index: 2;
+  }
+
+  @media (max-width: 768px) {
+    .container { padding: 0 20px; }
+  }
+
+  /* ────────────────────────────────────────────
+     NAV
+  ──────────────────────────────────────────── */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(250, 250, 247, 0.92);
+    backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid var(--color-border-light);
+  }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 32px;
+    max-width: var(--max-w);
+    margin: 0 auto;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--color-text);
+  }
+
+  .logo-mark {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 22px;
+    letter-spacing: -0.03em;
+    color: var(--color-red);
+  }
+
+  .logo-sep {
+    width: 1px;
+    height: 22px;
+    background: var(--color-border);
+  }
+
+  .logo-text {
+    font-size: 13px;
+    color: var(--color-text-muted);
+    letter-spacing: 0.02em;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--color-text-muted);
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+
+  .nav-links a:hover {
+    color: var(--color-red);
+  }
+
+  .nav-cta {
+    background: var(--color-red);
+    color: white !important;
+    padding: 9px 18px;
+    border-radius: 6px;
+    font-weight: 600 !important;
+    font-size: 13px !important;
+    transition: background 0.2s ease !important;
+  }
+
+  .nav-cta:hover {
+    background: var(--color-red-dark) !important;
+    color: white !important;
+  }
+
+  @media (max-width: 820px) {
+    .nav-links a:not(.nav-cta) { display: none; }
+    .nav-inner { padding: 14px 20px; }
+  }
+
+  /* ────────────────────────────────────────────
+     HERO
+  ──────────────────────────────────────────── */
+  .hero {
+    padding: 100px 0 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 50px;
+    right: -120px;
+    width: 480px;
+    height: 480px;
+    background: radial-gradient(circle, var(--color-red-light) 0%, transparent 65%);
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 60px;
+    align-items: end;
+  }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color-red);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 28px;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: var(--color-red);
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(48px, 8vw, 96px);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    color: var(--color-text);
+    margin-bottom: 20px;
+  }
+
+  .hero-title .accent {
+    color: var(--color-red);
+    font-style: italic;
+    font-weight: 600;
+  }
+
+  .hero-title .zh {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-weight: 900;
+    font-style: normal;
+    letter-spacing: -0.02em;
+    display: block;
+    margin-top: 8px;
+  }
+
+  .hero-lead {
+    font-size: 18px;
+    color: var(--color-text-muted);
+    max-width: 620px;
+    line-height: 1.6;
+    margin-top: 28px;
+    margin-bottom: 36px;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 80px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration: none;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    border: 1.5px solid transparent;
+    cursor: pointer;
+  }
+
+  .btn-primary {
+    background: var(--color-red);
+    color: white;
+    border-color: var(--color-red);
+  }
+
+  .btn-primary:hover {
+    background: var(--color-red-dark);
+    border-color: var(--color-red-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px -8px rgba(231, 36, 16, 0.5);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--color-text);
+    border-color: var(--color-border);
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--color-text);
+    background: var(--color-bg-alt);
+  }
+
+  .btn .arrow {
+    transition: transform 0.25s ease;
+  }
+
+  .btn:hover .arrow {
+    transform: translateX(3px);
+  }
+
+  /* Hero stats strip */
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--color-border);
+    padding-top: 32px;
+  }
+
+  .stat {
+    padding-right: 32px;
+    position: relative;
+  }
+
+  .stat:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 16px;
+    top: 8px;
+    bottom: 0;
+    width: 1px;
+    background: var(--color-border);
+  }
+
+  .stat-num {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(36px, 4.5vw, 56px);
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: var(--color-text);
+  }
+
+  .stat-num .unit {
+    font-size: 0.45em;
+    color: var(--color-text-subtle);
+    margin-left: 4px;
+    font-weight: 500;
+  }
+
+  .stat-label {
+    font-size: 13px;
+    color: var(--color-text-muted);
+    margin-top: 10px;
+    letter-spacing: 0.02em;
+  }
+
+  @media (max-width: 768px) {
+    .hero { padding: 60px 0 50px; }
+    .hero-stats { grid-template-columns: repeat(2, 1fr); gap: 24px 0; }
+    .stat:nth-child(2)::after { display: none; }
+    .hero-ctas { margin-bottom: 50px; }
+  }
+
+  /* ────────────────────────────────────────────
+     SECTION CHROME
+  ──────────────────────────────────────────── */
+  section {
+    padding: 100px 0;
+    position: relative;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 40px;
+    margin-bottom: 60px;
+    border-top: 1px solid var(--color-border);
+    padding-top: 24px;
+  }
+
+  .section-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-red);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    font-weight: 500;
+  }
+
+  .section-title {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-weight: 900;
+    font-size: clamp(32px, 5vw, 56px);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: var(--color-text);
+    max-width: 720px;
+  }
+
+  .section-title .small {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 0.45em;
+    color: var(--color-text-subtle);
+    margin-top: 14px;
+    letter-spacing: 0;
+  }
+
+  .section-side {
+    max-width: 320px;
+    font-size: 14px;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 820px) {
+    .section-header { flex-direction: column; gap: 24px; }
+    .section-side { text-align: left; max-width: 100%; }
+    section { padding: 70px 0; }
+  }
+
+  /* ────────────────────────────────────────────
+     VISION SECTION
+  ──────────────────────────────────────────── */
+  .vision-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--color-border);
+    border: 1px solid var(--color-border);
+  }
+
+  .vision-card {
+    background: var(--color-bg);
+    padding: 40px 32px;
+    position: relative;
+    transition: background 0.3s ease;
+  }
+
+  .vision-card:hover {
+    background: var(--color-bg-alt);
+  }
+
+  .vision-num {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-red);
+    letter-spacing: 0.1em;
+    margin-bottom: 32px;
+  }
+
+  .vision-icon {
+    width: 44px;
+    height: 44px;
+    border: 1.5px solid var(--color-text);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 28px;
+    color: var(--color-text);
+  }
+
+  .vision-title {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    margin-bottom: 14px;
+    letter-spacing: -0.01em;
+  }
+
+  .vision-text {
+    font-size: 14.5px;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+  }
+
+  @media (max-width: 768px) {
+    .vision-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ────────────────────────────────────────────
+     COMPARISON SECTION
+  ──────────────────────────────────────────── */
+  .comparison-flow {
+    text-align: center;
+    margin-bottom: 50px;
+    padding: 20px 28px;
+    background: var(--color-bg-alt);
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 14.5px;
+    color: var(--color-text-muted);
+    border: 1px solid var(--color-border-light);
+  }
+
+  .comparison-flow strong { font-weight: 600; }
+  .comparison-flow .teal { color: var(--color-teal-dark); }
+  .comparison-flow .pink { color: var(--color-pink-dark); }
+  .comparison-flow .arrow-mid { color: var(--color-text-subtle); }
+
+  .comparison-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+  }
+
+  .comparison-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .cmp-card {
+    background: white;
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .cmp-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 32px -16px rgba(0, 0, 0, 0.12);
+  }
+
+  .cmp-header {
+    padding: 28px 32px 24px;
+  }
+
+  .cmp-header.teal { background: var(--color-teal-light); }
+  .cmp-header.pink { background: var(--color-pink-light); }
+
+  .cmp-tag {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .cmp-header.teal .cmp-tag { color: var(--color-teal-dark); }
+  .cmp-header.pink .cmp-tag { color: var(--color-pink-dark); }
+
+  .cmp-name {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-weight: 800;
+    font-size: 30px;
+    letter-spacing: -0.02em;
+  }
+
+  .cmp-header.teal .cmp-name { color: var(--color-teal-dark); }
+  .cmp-header.pink .cmp-name { color: var(--color-pink-dark); }
+
+  .cmp-tagline {
+    font-size: 13.5px;
+    color: var(--color-text-muted);
+    margin-top: 8px;
+  }
+
+  .cmp-body {
+    padding: 8px 32px 28px;
+  }
+
+  .cmp-row {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--color-border-light);
+    font-size: 14px;
+    align-items: baseline;
+  }
+
+  .cmp-row:last-child { border-bottom: none; }
+
+  .cmp-key {
+    color: var(--color-text-subtle);
+    font-size: 13px;
+  }
+
+  .cmp-val {
+    color: var(--color-text);
+    font-weight: 500;
+  }
+
+  .cmp-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    padding: 0 32px 28px;
+  }
+
+  .cmp-pill {
+    font-size: 12px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-weight: 500;
+  }
+
+  .cmp-pill.teal { background: var(--color-teal-light); color: var(--color-teal-dark); }
+  .cmp-pill.pink { background: var(--color-pink-light); color: var(--color-pink-dark); }
+
+  @media (max-width: 820px) {
+    .comparison-grid { grid-template-columns: 1fr; }
+    .cmp-name { font-size: 26px; }
+  }
+
+  /* ────────────────────────────────────────────
+     DETAIL SECTIONS (慢跑社 / 企業跑班)
+  ──────────────────────────────────────────── */
+  .detail-section {
+    background: var(--color-bg-alt);
+  }
+
+  .detail-section.alt { background: var(--color-bg); }
+
+  .detail-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .detail-meta {
+    position: sticky;
+    top: 100px;
+  }
+
+  .detail-num {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(100px, 14vw, 180px);
+    line-height: 0.85;
+    color: var(--color-text);
+    margin-bottom: 24px;
+    letter-spacing: -0.06em;
+  }
+
+  .detail-num .slash {
+    color: var(--color-red);
+  }
+
+  .detail-num.teal { color: var(--color-teal-dark); }
+  .detail-num.pink { color: var(--color-pink-dark); }
+
+  .detail-kicker {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-red);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 14px;
+  }
+
+  .detail-title {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-weight: 800;
+    font-size: 42px;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+  }
+
+  .detail-lead {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    max-width: 480px;
+  }
+
+  .detail-content > * + * { margin-top: 28px; }
+
+  .feature-list {
+    list-style: none;
+  }
+
+  .feature-item {
+    display: grid;
+    grid-template-columns: 24px 1fr;
+    gap: 20px;
+    padding: 22px 0;
+    border-top: 1px solid var(--color-border);
+    align-items: start;
+  }
+
+  .feature-item:last-child { border-bottom: 1px solid var(--color-border); }
+
+  .feature-num {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-text-subtle);
+    padding-top: 4px;
+    font-weight: 500;
+  }
+
+  .feature-content h4 {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 6px;
+  }
+
+  .feature-content p {
+    font-size: 14.5px;
+    color: var(--color-text-muted);
+    line-height: 1.65;
+  }
+
+  .info-card {
+    background: white;
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 24px 28px;
+  }
+
+  .info-card-title {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-text-subtle);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 16px;
+  }
+
+  .info-card-rows .info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--color-border-light);
+    font-size: 14px;
+  }
+
+  .info-card-rows .info-row:last-child { border-bottom: none; }
+
+  .info-row .k { color: var(--color-text-subtle); }
+  .info-row .v { font-weight: 600; color: var(--color-text); text-align: right; }
+
+  @media (max-width: 1000px) {
+    .detail-grid { grid-template-columns: 1fr; gap: 40px; }
+    .detail-meta { position: static; }
+    .detail-num { font-size: 100px; }
+    .detail-title { font-size: 32px; }
+  }
+
+  /* ────────────────────────────────────────────
+     12 WEEK TRAINING TIMELINE
+  ──────────────────────────────────────────── */
+  .timeline-section {
+    background: var(--color-bg-dark);
+    color: white;
+    padding: 110px 0;
+  }
+
+  .timeline-section .section-title { color: white; }
+  .timeline-section .section-eyebrow { color: var(--color-red); }
+  .timeline-section .section-header { border-top-color: rgba(255,255,255,0.12); }
+  .timeline-section .section-side { color: rgba(255,255,255,0.6); }
+  .timeline-section .section-title .small { color: rgba(255,255,255,0.5); }
+
+  .timeline {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .phase {
+    background: var(--color-bg-dark);
+    padding: 32px 24px 40px;
+    position: relative;
+    transition: background 0.3s ease;
+  }
+
+  .phase:hover {
+    background: #1A1A1A;
+  }
+
+  .phase-week {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--color-red);
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+
+  .phase-name {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+
+  .phase-name-en {
+    font-family: var(--font-display);
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 24px;
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .phase-content {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.75);
+  }
+
+  .phase-content li {
+    list-style: none;
+    padding-left: 14px;
+    position: relative;
+    margin-bottom: 6px;
+  }
+
+  .phase-content li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--color-red);
+  }
+
+  @media (max-width: 1000px) {
+    .timeline { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 540px) {
+    .timeline { grid-template-columns: 1fr; }
+  }
+
+  /* ────────────────────────────────────────────
+     DEPOSIT MECHANIC
+  ──────────────────────────────────────────── */
+  .deposit-section {
+    padding: 110px 0;
+    background: var(--color-bg);
+  }
+
+  .deposit-card {
+    background: white;
+    border: 1px solid var(--color-border);
+    border-radius: 24px;
+    padding: 64px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .deposit-card::before {
+    content: 'NT$';
+    position: absolute;
+    top: -40px;
+    right: -20px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 200px;
+    color: var(--color-red-light);
+    z-index: 0;
+    line-height: 1;
+    user-select: none;
+  }
+
+  .deposit-card > * { position: relative; z-index: 1; }
+
+  .deposit-amount {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(80px, 12vw, 144px);
+    color: var(--color-red);
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+  }
+
+  .deposit-amount .currency {
+    font-size: 0.4em;
+    color: var(--color-text);
+    font-weight: 500;
+    margin-right: 8px;
+    vertical-align: super;
+  }
+
+  .deposit-label {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-text-subtle);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-top: 12px;
+  }
+
+  .deposit-text h3 {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-weight: 800;
+    font-size: 32px;
+    margin-bottom: 18px;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+
+  .deposit-text p {
+    font-size: 15px;
+    color: var(--color-text-muted);
+    line-height: 1.75;
+    margin-bottom: 18px;
+  }
+
+  .deposit-conditions {
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid var(--color-border-light);
+  }
+
+  .deposit-conditions h4 {
+    font-size: 13px;
+    color: var(--color-text-subtle);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 14px;
+    font-family: var(--font-mono);
+  }
+
+  .deposit-conditions ul {
+    list-style: none;
+  }
+
+  .deposit-conditions li {
+    padding: 6px 0 6px 24px;
+    position: relative;
+    font-size: 14.5px;
+    color: var(--color-text);
+  }
+
+  .deposit-conditions li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--color-red);
+    font-weight: 700;
+  }
+
+  @media (max-width: 900px) {
+    .deposit-card { grid-template-columns: 1fr; gap: 40px; padding: 40px 32px; }
+    .deposit-card::before { font-size: 120px; top: -20px; right: -10px; }
+  }
+
+  /* ────────────────────────────────────────────
+     FAQ
+  ──────────────────────────────────────────── */
+  .faq-list {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .faq-q {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 28px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    cursor: pointer;
+    text-align: left;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--color-text);
+    transition: color 0.2s ease;
+  }
+
+  .faq-q:hover { color: var(--color-red); }
+
+  .faq-num {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-text-subtle);
+    font-weight: 500;
+    margin-right: 24px;
+    flex-shrink: 0;
+  }
+
+  .faq-text {
+    flex: 1;
+    text-align: left;
+  }
+
+  .faq-toggle {
+    width: 28px;
+    height: 28px;
+    border: 1px solid var(--color-border);
+    border-radius: 50%;
+    flex-shrink: 0;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  .faq-toggle::before,
+  .faq-toggle::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background: var(--color-text);
+    transition: transform 0.3s ease;
+  }
+
+  .faq-toggle::before {
+    width: 12px;
+    height: 1.5px;
+    transform: translate(-50%, -50%);
+  }
+
+  .faq-toggle::after {
+    width: 1.5px;
+    height: 12px;
+    transform: translate(-50%, -50%);
+  }
+
+  .faq-item.open .faq-toggle {
+    background: var(--color-red);
+    border-color: var(--color-red);
+  }
+
+  .faq-item.open .faq-toggle::before,
+  .faq-item.open .faq-toggle::after {
+    background: white;
+  }
+
+  .faq-item.open .faq-toggle::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+  }
+
+  .faq-item.open .faq-a {
+    max-height: 400px;
+    padding-bottom: 28px;
+  }
+
+  .faq-a-inner {
+    padding-left: 60px;
+    padding-right: 60px;
+    font-size: 15px;
+    color: var(--color-text-muted);
+    line-height: 1.75;
+  }
+
+  @media (max-width: 600px) {
+    .faq-q { font-size: 16px; }
+    .faq-num { margin-right: 14px; }
+    .faq-a-inner { padding-left: 38px; padding-right: 0; }
+  }
+
+  /* ────────────────────────────────────────────
+     CTA
+  ──────────────────────────────────────────── */
+  .cta-section {
+    background: var(--color-red);
+    color: white;
+    padding: 120px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    left: -100px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cta-section::after {
+    content: '';
+    position: absolute;
+    bottom: -150px;
+    right: -150px;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cta-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 80px;
+    align-items: end;
+    position: relative;
+    z-index: 2;
+  }
+
+  .cta-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: rgba(255,255,255,0.8);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .cta-title {
+    font-family: 'Noto Sans TC', sans-serif;
+    font-weight: 900;
+    font-size: clamp(40px, 6.5vw, 80px);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: 24px;
+  }
+
+  .cta-lead {
+    font-size: 17px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.85);
+    max-width: 540px;
+  }
+
+  .cta-deadline {
+    text-align: right;
+  }
+
+  .cta-deadline-label {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: rgba(255,255,255,0.7);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 12px;
+  }
+
+  .cta-deadline-date {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 72px;
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+
+  .cta-deadline-sub {
+    font-size: 14px;
+    color: rgba(255,255,255,0.8);
+    margin-top: 8px;
+  }
+
+  .cta-action {
+    margin-top: 50px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .btn-white {
+    background: white;
+    color: var(--color-red);
+    padding: 18px 36px;
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .btn-white:hover {
+    background: var(--color-text);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px -8px rgba(0,0,0,0.3);
+  }
+
+  .cta-meta {
+    font-size: 14px;
+    color: rgba(255,255,255,0.8);
+  }
+
+  .cta-meta strong { color: white; font-weight: 600; }
+
+  @media (max-width: 820px) {
+    .cta-grid { grid-template-columns: 1fr; gap: 40px; }
+    .cta-deadline { text-align: left; }
+    .cta-deadline-date { font-size: 56px; }
+    .cta-action { flex-direction: column; align-items: flex-start; }
+  }
+
+  /* ────────────────────────────────────────────
+     FOOTER
+  ──────────────────────────────────────────── */
+  footer {
+    background: var(--color-bg-dark);
+    color: rgba(255,255,255,0.8);
+    padding: 60px 0 32px;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 60px;
+    margin-bottom: 48px;
+  }
+
+  .footer-brand .logo-mark {
+    font-size: 28px;
+    color: var(--color-red);
+  }
+
+  .footer-tagline {
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);
+    margin-top: 16px;
+    max-width: 320px;
+    line-height: 1.6;
+  }
+
+  .footer-col h5 {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 18px;
+  }
+
+  .footer-col ul { list-style: none; }
+  .footer-col li { padding: 6px 0; font-size: 14px; }
+  .footer-col a { color: rgba(255,255,255,0.8); text-decoration: none; transition: color 0.2s ease; }
+  .footer-col a:hover { color: var(--color-red); }
+
+  .footer-bottom {
+    padding-top: 28px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+  }
+
+  @media (max-width: 768px) {
+    .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+  }
+
+  /* Reveal animation */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    animation: fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  /* Helper */
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     NAV
+═══════════════════════════════════════════ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="logo">
+      <span class="logo-mark">91APP</span>
+      <span class="logo-sep"></span>
+      <span class="logo-text">運動風氣推行計畫</span>
+    </a>
+    <div class="nav-links">
+      <a href="#vision">願景</a>
+      <a href="#compare">雙軌計畫</a>
+      <a href="#club">慢跑社</a>
+      <a href="#elite">企業跑班</a>
+      <a href="#faq">FAQ</a>
+      <a href="#apply" class="nav-cta">立即報名</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════ -->
+<header class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-eyebrow">2026 / Q3 — Q4  ·  Initiative</div>
+        <h1 class="hero-title">
+          <span>Run with</span> <span class="accent">purpose.</span>
+          <span class="zh">推行 91APP 運動風氣</span>
+        </h1>
+        <p class="hero-lead">
+          以慢跑社作為示範社團，企業跑班作為進階訓練——從入門到突破，
+          讓 91APP 同仁不只衝刺業績，也照顧自己的身心。雙軌並行，建立完整的跑步生態。
+        </p>
+        <div class="hero-ctas">
+          <a href="#apply" class="btn btn-primary">
+            報名企業跑班
+            <span class="arrow">→</span>
+          </a>
+          <a href="#club" class="btn btn-secondary">
+            了解慢跑社
+            <span class="arrow">→</span>
+          </a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat">
+            <div class="stat-num">12<span class="unit">週</span></div>
+            <div class="stat-label">科學化訓練</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">10–15<span class="unit">人</span></div>
+            <div class="stat-label">企業跑班小班制</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">2<span class="unit">場地</span></div>
+            <div class="stat-label">台北田徑場・松山彩虹橋</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">1<span class="unit">目標</span></div>
+            <div class="stat-label">台北馬拉松</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════
+     VISION
+═══════════════════════════════════════════ -->
+<section id="vision">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <div class="section-eyebrow">01 — Why we run</div>
+        <h2 class="section-title">
+          為什麼推動<br>運動風氣？
+          <span class="small">Sport as a corporate value, not a perk.</span>
+        </h2>
+      </div>
+      <div class="section-side">
+        91APP 不只是一家拚業績的科技公司。<br>
+        我們相信，員工的身心健康，才是組織真正的續航力。
+      </div>
+    </div>
+
+    <div class="vision-grid">
+      <div class="vision-card">
+        <div class="vision-num">01</div>
+        <div class="vision-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+          </svg>
+        </div>
+        <h3 class="vision-title">身心健康，企業續航力</h3>
+        <p class="vision-text">
+          科技業久坐、高腦力消耗，運動是最直接、最持久的恢復力來源。投資同仁健康，就是投資公司未來。
+        </p>
+      </div>
+      <div class="vision-card">
+        <div class="vision-num">02</div>
+        <div class="vision-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+            <circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+          </svg>
+        </div>
+        <h3 class="vision-title">跨部門凝聚力</h3>
+        <p class="vision-text">
+          跑步是最不講職位、最講真誠的活動。讓 RD、PM、設計、業務在跑道上成為夥伴，把默契帶回工作。
+        </p>
+      </div>
+      <div class="vision-card">
+        <div class="vision-num">03</div>
+        <div class="vision-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+            <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+            <path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
+            <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
+            <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
+          </svg>
+        </div>
+        <h3 class="vision-title">雇主品牌差異化</h3>
+        <p class="vision-text">
+          在科技人才市場，一個能陪你跑馬拉松的公司，比一個只發股票的公司更有溫度。讓福利成為記憶點。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     COMPARISON
+═══════════════════════════════════════════ -->
+<section id="compare" style="padding-top: 60px;">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <div class="section-eyebrow">02 — Two tracks, one goal</div>
+        <h2 class="section-title">
+          雙軌並行<br>從入門到進階
+          <span class="small">Foundation builds the culture. Advanced sets the bar.</span>
+        </h2>
+      </div>
+      <div class="section-side">
+        慢跑社負責廣納同仁、建立習慣；<br>
+        企業跑班負責科學訓練、賽事達標。<br>
+        兩者互補，缺一不可。
+      </div>
+    </div>
+
+    <div class="comparison-wrap">
+      <div class="comparison-flow">
+        <strong class="teal">慢跑社</strong>
+        廣納同仁、建立習慣
+        <span class="arrow-mid">→</span>
+        <strong class="pink">企業跑班</strong>
+        進階訓練、衝刺目標
+      </div>
+    </div>
+
+    <div class="comparison-grid">
+      <!-- 慢跑社 -->
+      <div class="cmp-card">
+        <div class="cmp-header teal">
+          <div class="cmp-tag">FOUNDATION · 領頭羊</div>
+          <div class="cmp-name">慢跑社社課</div>
+          <div class="cmp-tagline">開心跑、零門檻、想來都可以</div>
+        </div>
+        <div class="cmp-body">
+          <div class="cmp-row"><span class="cmp-key">參加門檻</span><span class="cmp-val">無門檻，全體同仁皆可</span></div>
+          <div class="cmp-row"><span class="cmp-key">預計人數</span><span class="cmp-val">不限，廣納所有同仁</span></div>
+          <div class="cmp-row"><span class="cmp-key">教練配置</span><span class="cmp-val">1 位教練帶配速</span></div>
+          <div class="cmp-row"><span class="cmp-key">訓練方式</span><span class="cmp-val">團體配速跑、體驗為主</span></div>
+          <div class="cmp-row"><span class="cmp-key">頻率</span><span class="cmp-val">隔週二一堂</span></div>
+          <div class="cmp-row"><span class="cmp-key">賽事目標</span><span class="cmp-val">佛性、無強制</span></div>
+          <div class="cmp-row"><span class="cmp-key">預算規模</span><span class="cmp-val">NT$ 25,000 / 季</span></div>
+        </div>
+        <div class="cmp-tags">
+          <span class="cmp-pill teal">#廣納人才</span>
+          <span class="cmp-pill teal">#建立習慣</span>
+          <span class="cmp-pill teal">#輕鬆交友</span>
+        </div>
+      </div>
+
+      <!-- 企業跑班 -->
+      <div class="cmp-card">
+        <div class="cmp-header pink">
+          <div class="cmp-tag">ADVANCED · 目標突破</div>
+          <div class="cmp-name">企業跑班</div>
+          <div class="cmp-tagline">科學化訓練、設定目標、進階突破</div>
+        </div>
+        <div class="cmp-body">
+          <div class="cmp-row"><span class="cmp-key">參加門檻</span><span class="cmp-val">目標可完成 21K 半馬以上</span></div>
+          <div class="cmp-row"><span class="cmp-key">目標人數</span><span class="cmp-val">10–15 人 / 一期</span></div>
+          <div class="cmp-row"><span class="cmp-key">教練配置</span><span class="cmp-val">1 位專任教練 + 1 位助教</span></div>
+          <div class="cmp-row"><span class="cmp-key">訓練方式</span><span class="cmp-val">12 週系統化課表</span></div>
+          <div class="cmp-row"><span class="cmp-key">頻率</span><span class="cmp-val">每週三 19:00–20:30</span></div>
+          <div class="cmp-row"><span class="cmp-key">賽事目標</span><span class="cmp-val">明確（如台北馬 PB / 完賽）</span></div>
+          <div class="cmp-row"><span class="cmp-key">預算規模</span><span class="cmp-val">NT$ 90,000 / 期</span></div>
+        </div>
+        <div class="cmp-tags">
+          <span class="cmp-pill pink">#科學訓練</span>
+          <span class="cmp-pill pink">#目標達成</span>
+          <span class="cmp-pill pink">#不受傷</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     CLUB DETAILS — 慢跑社
+═══════════════════════════════════════════ -->
+<section id="club" class="detail-section">
+  <div class="container">
+    <div class="detail-grid">
+      <div class="detail-meta">
+        <div class="detail-num teal">02<span class="slash">/</span></div>
+        <div class="detail-kicker">FOUNDATION TRACK</div>
+        <h2 class="detail-title">慢跑社<br>社團課程</h2>
+        <p class="detail-lead">
+          想開始跑步但不知從何開始？慢跑社隔週二的社團課程，無論你是完全新手、想找跑伴，
+          還是想保持輕鬆運動習慣的同仁，都歡迎加入。零門檻、零壓力、想來就來。
+        </p>
+      </div>
+
+      <div class="detail-content">
+        <div class="info-card">
+          <div class="info-card-title">基本資訊</div>
+          <div class="info-card-rows">
+            <div class="info-row"><span class="k">活動頻率</span><span class="v">隔週二</span></div>
+            <div class="info-row"><span class="k">活動時段</span><span class="v">19:00–20:30</span></div>
+            <div class="info-row"><span class="k">主要場地</span><span class="v">台北田徑場</span></div>
+            <div class="info-row"><span class="k">參加門檻</span><span class="v">無，全體 91APP 同仁皆可</span></div>
+            <div class="info-row"><span class="k">教練配置</span><span class="v">1 位專業教練</span></div>
+            <div class="info-row"><span class="k">費用</span><span class="v">社團補助、個人負擔極低</span></div>
+          </div>
+        </div>
+
+        <ul class="feature-list">
+          <li class="feature-item">
+            <span class="feature-num">F01</span>
+            <div class="feature-content">
+              <h4>團體配速跑</h4>
+              <p>由教練帶領，依當天參加同仁狀況彈性調整配速與距離，沒有「跟不上」的壓力。</p>
+            </div>
+          </li>
+          <li class="feature-item">
+            <span class="feature-num">F02</span>
+            <div class="feature-content">
+              <h4>跨部門社群</h4>
+              <p>從工程師到 PM、從 TW 到 HK 出差來台同仁，社課就是最自然的破冰場。</p>
+            </div>
+          </li>
+          <li class="feature-item">
+            <span class="feature-num">F03</span>
+            <div class="feature-content">
+              <h4>賽事資訊互通</h4>
+              <p>跑友推薦的賽事、揪團報名、配備團購，慢跑社 Slack 頻道一站搞定。</p>
+            </div>
+          </li>
+          <li class="feature-item">
+            <span class="feature-num">F04</span>
+            <div class="feature-content">
+              <h4>未來企業跑班入場券</h4>
+              <p>從慢跑社累積里程、完賽半馬，自然進階到企業跑班的進階訓練。</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     ELITE DETAILS — 企業跑班
+═══════════════════════════════════════════ -->
+<section id="elite" class="detail-section alt">
+  <div class="container">
+    <div class="detail-grid">
+      <div class="detail-meta">
+        <div class="detail-num pink">03<span class="slash">/</span></div>
+        <div class="detail-kicker">ADVANCED TRACK · 2026 Q3 START</div>
+        <h2 class="detail-title">91APP<br>企業跑班</h2>
+        <p class="detail-lead">
+          為已有半馬底子的 91APP 同仁打造的進階訓練班。12 週系統化課表、專任教練、
+          數據化追蹤，目標——挑戰下半年指定賽事。不受傷為最高前提，健康快樂達標。
+        </p>
+      </div>
+
+      <div class="detail-content">
+        <div class="info-card">
+          <div class="info-card-title">第一期資訊</div>
+          <div class="info-card-rows">
+            <div class="info-row"><span class="k">期間</span><span class="v">9/16 (三) 起，為期 12 週</span></div>
+            <div class="info-row"><span class="k">訓練時段</span><span class="v">每週三 19:00–20:30</span></div>
+            <div class="info-row"><span class="k">場地</span><span class="v">台北田徑場 / 松山彩虹橋（輪替）</span></div>
+            <div class="info-row"><span class="k">招募名額</span><span class="v">10–15 人</span></div>
+            <div class="info-row"><span class="k">參加門檻</span><span class="v">目標可完成 21K 半馬以上</span></div>
+            <div class="info-row"><span class="k">教練配置</span><span class="v">1 位專任教練 + 1 位助教</span></div>
+            <div class="info-row"><span class="k">押金</span><span class="v">NT$ 2,000（達標退還）</span></div>
+            <div class="info-row"><span class="k">報名截止</span><span class="v">2026 / 8 / 1</span></div>
+          </div>
+        </div>
+
+        <ul class="feature-list">
+          <li class="feature-item">
+            <span class="feature-num">E01</span>
+            <div class="feature-content">
+              <h4>專業教練 × 科學化訓練</h4>
+              <p>由 PBRC 天生動良專業教練團隊執教，結合現役選手經驗與運動防護背景，週期化課表科學提升。</p>
+            </div>
+          </li>
+          <li class="feature-item">
+            <span class="feature-num">E02</span>
+            <div class="feature-content">
+              <h4>91APP 跑班專屬跑衣</h4>
+              <p>為跑班量身設計的專屬跑衣，賽事亮相時集體穿著，展現團隊識別與向心力。</p>
+            </div>
+          </li>
+          <li class="feature-item">
+            <span class="feature-num">E03</span>
+            <div class="feature-content">
+              <h4>個人化跑鞋贊助</h4>
+              <p>公司提供贊助額度，可依個人腳型與訓練需求選擇主流品牌專業跑鞋。</p>
+            </div>
+          </li>
+          <li class="feature-item">
+            <span class="feature-num">E04</span>
+            <div class="feature-content">
+              <h4>台北馬拉松賽事補助</h4>
+              <p>第一期目標賽事為 2026 台北馬，公司提供報名費補助，鼓勵同仁上場挑戰。</p>
+            </div>
+          </li>
+          <li class="feature-item">
+            <span class="feature-num">E05</span>
+            <div class="feature-content">
+              <h4>週間訓練課表</h4>
+              <p>除了每週三實體課，教練會根據每位同仁狀況提供個人化週間自主訓練課表。</p>
+            </div>
+          </li>
+          <li class="feature-item">
+            <span class="feature-num">E06</span>
+            <div class="feature-content">
+              <h4>課後影像回饋</h4>
+              <p>提供課堂錄影，教練針對跑姿、配速做課後個別回饋，如同 Code Review，但對象是你的跑姿。</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     12 WEEK TIMELINE
+═══════════════════════════════════════════ -->
+<section id="timeline" class="timeline-section">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <div class="section-eyebrow">04 — 12 weeks · 5 phases</div>
+        <h2 class="section-title">
+          12 週訓練週期<br>循序漸進、科學提升
+          <span class="small">From assessment to race day, every week has a purpose.</span>
+        </h2>
+      </div>
+      <div class="section-side" style="color: rgba(255,255,255,0.6);">
+        從入班檢測、基礎建立、強化提升，到賽前轉換、賽事檢核——<br>
+        每一階段都有明確目標。
+      </div>
+    </div>
+
+    <div class="timeline">
+      <div class="phase">
+        <div class="phase-week">W1 – W2</div>
+        <div class="phase-name">入班期</div>
+        <div class="phase-name-en">Onboarding</div>
+        <ul class="phase-content">
+          <li>基礎體能檢測</li>
+          <li>跑姿錄影評估</li>
+          <li>個人目標設定</li>
+          <li>建立訓練節奏</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <div class="phase-week">W3 – W5</div>
+        <div class="phase-name">基礎期</div>
+        <div class="phase-name-en">Base Building</div>
+        <ul class="phase-content">
+          <li>有氧基礎建立</li>
+          <li>跑姿動作矯正</li>
+          <li>核心與肌力整合</li>
+          <li>累積週量</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <div class="phase-week">W6 – W9</div>
+        <div class="phase-name">強化期</div>
+        <div class="phase-name-en">Build Phase</div>
+        <ul class="phase-content">
+          <li>間歇訓練</li>
+          <li>節奏跑（Tempo）</li>
+          <li>長距離訓練（LSD）</li>
+          <li>配速感建立</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <div class="phase-week">W10 – W11</div>
+        <div class="phase-name">轉換期</div>
+        <div class="phase-name-en">Taper</div>
+        <ul class="phase-content">
+          <li>賽前減量</li>
+          <li>配速模擬</li>
+          <li>賽事策略</li>
+          <li>身心調整</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <div class="phase-week">W12</div>
+        <div class="phase-name">檢核期</div>
+        <div class="phase-name-en">Race Week</div>
+        <ul class="phase-content">
+          <li>賽前最終調整</li>
+          <li>目標賽事上場</li>
+          <li>期末成果發表</li>
+          <li>第二期回顧</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     DEPOSIT MECHANIC
+═══════════════════════════════════════════ -->
+<section class="deposit-section">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <div class="section-eyebrow">05 — Commitment, not cost</div>
+        <h2 class="section-title">
+          押金機制：<br>是承諾，不是費用
+          <span class="small">$2,000 to commit. Finish strong, get it all back.</span>
+        </h2>
+      </div>
+    </div>
+
+    <div class="deposit-card">
+      <div>
+        <div class="deposit-amount">
+          <span class="currency">NT$</span>2,000
+        </div>
+        <div class="deposit-label">Refundable on completion</div>
+      </div>
+      <div class="deposit-text">
+        <h3>用 $2,000，換 12 週的自己。</h3>
+        <p>
+          入選後繳納 NT$ 2,000 押金。我們不是要你花錢買訓練——而是希望你「真的會來」。
+          完整參與訓練、完賽目標賽事，押金全額退還；公司承擔所有訓練、跑衣、跑鞋、賽事補助成本。
+        </p>
+        <p>
+          這是一種互相承諾：你承諾不放棄，我們承諾不缺席。
+        </p>
+
+        <div class="deposit-conditions">
+          <h4>退還條件</h4>
+          <ul>
+            <li>出席率達 9 / 12 堂以上</li>
+            <li>順利完賽目標賽事（如 2026 台北馬）</li>
+            <li>教練認可的傷病退出，押金全額退還</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     FAQ
+═══════════════════════════════════════════ -->
+<section id="faq">
+  <div class="container">
+    <div class="section-header">
+      <div>
+        <div class="section-eyebrow">06 — Frequently asked</div>
+        <h2 class="section-title">
+          報名前先看這裡
+          <span class="small">All the things you wanted to ask but were too busy to type.</span>
+        </h2>
+      </div>
+    </div>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          <span class="faq-num">Q01</span>
+          <span class="faq-text">我半馬還沒比過，但有信心完成，可以報名嗎？</span>
+          <span class="faq-toggle"></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          可以！報名門檻是「目標可完成 21K 半馬以上」，包括還沒比賽但體能達標的同仁。報名表單會請你填寫近期跑量與最長單次距離，由教練評估資格。
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          <span class="faq-num">Q02</span>
+          <span class="faq-text">如果中途因傷無法繼續，押金怎麼處理？</span>
+          <span class="faq-toggle"></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          教練評估認可的傷病退出，押金全額退還。但若無故缺席超過 3 次，押金將作為班費補貼。請務必衡量自己的時間後再報名。
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          <span class="faq-num">Q03</span>
+          <span class="faq-text">跑鞋是公司全額贊助嗎？有指定品牌嗎？</span>
+          <span class="faq-toggle"></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          公司提供贊助額度，可選擇主流跑鞋品牌（Nike, Asics, Adidas, On, Hoka 等）符合個人腳型與訓練需求的型號。實際選購方式會在入選後公告。
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          <span class="faq-num">Q04</span>
+          <span class="faq-text">我們的教練是誰？</span>
+          <span class="faq-toggle"></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          由 PBRC 天生動良專業教練團隊執教，包括科學化訓練、配速策略、運動防護背景的教練群。第一期教練名單會在報名截止後公告。
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          <span class="faq-num">Q05</span>
+          <span class="faq-text">報名超過 15 人怎麼辦？</span>
+          <span class="faq-toggle"></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          採「先搶先贏 + 資格審核」雙機制。報名額滿後會建立候補名單，若有正取放棄則依序遞補。資格審核會由教練評估跑步背景與目標可行性。
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          <span class="faq-num">Q06</span>
+          <span class="faq-text">訓練場地會在哪？怎麼通知？</span>
+          <span class="faq-toggle"></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          主要在台北田徑場與松山彩虹橋雙場地輪替，依訓練內容（如間歇 vs 長距離）安排。每週上課時間與地點會於專屬 Slack channel 提前公告。
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          <span class="faq-num">Q07</span>
+          <span class="faq-text">如果不能每週三 19:00 都到，可以參加嗎？</span>
+          <span class="faq-toggle"></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          出席率需達 9 / 12 堂以上才能領回押金。如有特殊狀況（出差、家庭因素）可事先請假，並透過課程錄影補課。短期密集出差請審慎評估是否參加本期。
+        </div></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+          <span class="faq-num">Q08</span>
+          <span class="faq-text">12 週結束後呢？會有第二期嗎？</span>
+          <span class="faq-toggle"></span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          視第一期成果評估開設第二期，並鼓勵畢業生回流為「學長姊」帶領下一批同仁。長期目標是讓 91APP 跑班成為公司年度健康文化的一部分。
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     CTA / APPLY
+═══════════════════════════════════════════ -->
+<section id="apply" class="cta-section">
+  <div class="container">
+    <div class="cta-grid">
+      <div>
+        <div class="cta-eyebrow">07 — Apply now</div>
+        <h2 class="cta-title">
+          準備好<br>跑進 91APP 的新節奏？
+        </h2>
+        <p class="cta-lead">
+          填寫報名表單，先搶先贏。我們會在資格審核後公布入選名單，
+          一起準備迎接 12 週的訓練與目標賽事。
+        </p>
+      </div>
+      <div class="cta-deadline">
+        <div class="cta-deadline-label">Deadline</div>
+        <div class="cta-deadline-date">08 / 01</div>
+        <div class="cta-deadline-sub">2026 報名截止</div>
+      </div>
+    </div>
+
+    <div class="cta-action">
+      <a href="#" id="apply-btn" class="btn btn-white">
+        填寫報名表單
+        <span class="arrow">→</span>
+      </a>
+      <div class="cta-meta">
+        資格審核後公布名單　·　額滿為止　·　<strong>有問題 Slack 私訊 Kevin Deng</strong>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="logo-mark">91APP</span>
+        <div class="footer-tagline">
+          運動風氣推行計畫——以慢跑社為示範社團，企業跑班為進階訓練。讓 91APP 同仁不只衝刺業績，也跑出健康的人生節奏。
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>計畫</h5>
+        <ul>
+          <li><a href="#vision">推行願景</a></li>
+          <li><a href="#compare">雙軌計畫</a></li>
+          <li><a href="#club">慢跑社</a></li>
+          <li><a href="#elite">企業跑班</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>聯絡</h5>
+        <ul>
+          <li><a href="#">Slack：#91app-running</a></li>
+          <li><a href="#">負責人：Kevin Deng</a></li>
+          <li><a href="#apply">立即報名</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 91APP Inc.  ·  Confidential & Proprietary</div>
+      <div style="font-family: var(--font-mono); font-size: 11px;">v1.0 · Built for 91APP runners</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Simple scroll-triggered reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('reveal');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.section-header, .vision-card, .cmp-card, .feature-item, .info-card, .phase, .deposit-card, .faq-item').forEach(el => {
+    io.observe(el);
+  });
+</script>
+</body>
+</html>
